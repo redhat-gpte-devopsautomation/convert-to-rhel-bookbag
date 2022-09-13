@@ -12,10 +12,15 @@
 # Only use this if you have no terminal, no slides, and no console.
 #export DEFAULT_PAGE='workshop'
 
+export DEFAULT_PAGE='dashboard'
+
 # Flags to explicitly enable/disable specific components
-ENABLE_CONSOLE='True'
-ENABLE_DASHBOARD='True'
-ENABLE_SLIDES='True'
-ENABLE_TERMINAL='True'
-ENABLE_WEBDAV='True'
+ENABLE_CONSOLE='false'
+ENABLE_DASHBOARD='true'
+ENABLE_SLIDES='false'
+SLIDES_DIR='/opt/app-root/slides'
+ENABLE_TERMINAL='true'
+#ENABLE_WEBDAV='false'
 ENABLE_WORKSHOP='true'
+APPLICATION_NAME='bookbag'
+WORKSHOP_NAME='bookbag'
