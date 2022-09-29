@@ -9,21 +9,22 @@ The following content is an example of what to include in an overview.
 
 === Lab Access
 
-You can access your lab environment as {user} with password "{ssh_password}" with the following command:
+You can access your lab environment as %user% with password %ssh_password% with the following command:
 
-[source,bash,options="nowrap",subs="{markup-in-source}"]
+[source,bash,role=execute]
 ----
 %ssh_command%
 ----
 
 ----
+
 [subs=attributes]
 ++++
 <a href="#" onclick="parent.send_to_terminal('openshift-install create install-config --dir $HOME/cluster-{guid}', 1); return false;">Run it!</a>
 ++++
 ----
 
-Your lab GUID is "{guid}".
+Your lab GUID is %guid%.
 
 An example var was set to %example_var%.
 
@@ -35,3 +36,329 @@ Informational messages generated for your workshop:
 ----
 %user_info_messages%
 ----
+:doctype: book
+
+'''
+
+slug: step1 id: ujri9ug22z4k type: challenge title: Step 1 notes:
+
+* type: text contents: |   # Goal:   After completing this scenario, users will be able to convert a CentOS Linux instance to a Red Hat Enterprise Linux instance.
++
+# Concepts included in this scenario:
+
+ ** Subscribing to additional repositories
+ ** Convert2RHEL utility
+
++
+# Example Usecase:   In order to standardize your infrasturcture under a single platform, you need to convert your RPM-based servers over to Red Hat Enterprise Linux.
+tabs:
+
+* title: Terminal type: terminal hostname: host difficulty: basic timelimit: 600 --
+
+= What is Convert2RHEL
+
+Convert2RHEL is a command line utility that allows for self-service migration between RHEL-like distributions to officially supported Red Hat Enterprise Linux instances.
+
+The convert2rhel tool handles subscribing the target system to your Red Hat customer account while maintaining customizations, configurations, and workloads.
+
+Convert2RHEL is also a supported operation which means if you run into issues with the conversion process, you can open a ticket with Red Hat Support.
+
+= Enabling the Convert2RHEL repository
+
+The Convert2RHEL RPM is an offical Red Hat package.
+Therefore it is readily availble from the Red Hat software repository (CDN).
+As your CentOS server is not subscribed to the Red Hat CDN, you will need to enable the Convert2RHEL repository.
+
+First, you will pull down the GPG signing key:
+
+[source,bash,options="nowrap"]
+----
+curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/security/data/fd431d51.txt
+----
+
+[,]
+....
+
+# curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/security/data/fd431d51.txt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1855  100  1855    0     0   2324      0 --:--:-- --:--:-- --:--:--  2324
+....
+
+Second, download the SSL certificate:
+
+[source,bash,options="nowrap"]
+----
+curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/convert2rhel/redhat-uep.pem
+----
+
+[,]
+....
+
+# curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/convert2rhel/redhat-uep.pem
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  7411  100  7411    0     0  15260      0 --:--:-- --:--:-- --:--:-- 15280
+....
+
+Thirdly, download the convert2rhel repository file:
+
+[source,bash,options="nowrap"]
+----
+curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert2rhel/7/convert2rhel.repo
+----
+
+[,]
+....
+
+# curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert2rhel/7/convert2rhel.repo
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   247  100   247    0     0    509      0 --:--:-- --:--:-- --:--:--   510
+....
+
+= Installing the Convert2RHEL utility
+:difficulty: basic
+:id: 1xt3c7zvsueu
+:notes: [{"type"=>"text", "contents"=>"Now that the requisite repository is enabled on your CentOS Linux system, it is time to install the Convert2RHEL utility and prepare the system for conversion.\n"}]
+:slug: step2
+:tabs: [{"title"=>"Terminal", "type"=>"terminal", "hostname"=>"host"}]
+:timelimit: 600
+:type: challenge
+
+Before you begin the installation process, verify that you are running CentOS Linux and on the latest minor version.
+
+[source,bash,options="nowrap"]
+----
+cat /etc/centos-release
+----
+
+[,]
+....
+
+# cat /etc/centos-release
+CentOS Linux release 7.9.2009 (Core)
+....
+
+In the previous step, you enabled the Convert2RHEL software repository.
+That gave your CentOS Linux server access to the convert2rhel RPM package and its dependencies from the Red Hat CDN.
+Verify that the Convert2RHEL repo is enabled:
+
+[source,bash,options="nowrap"]
+----
+yum repolist
+----
+
+[,]
+....
+
+# yum repolist
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: ftp.pasteur.fr
+ * extras: centos.mirror.ate.info
+ * updates: ftp.pasteur.fr
+repo id                                                                                   repo name                                                                          status
+base/7/x86_64                                                                             CentOS-7 - Base                                                                    10,072
+convert2rhel-for-rhel-7-rpms                                                              Convert2RHEL for OS 7                                                                   5
+extras/7/x86_64                                                                           CentOS-7 - Extras                                                                     512
+updates/7/x86_64                                                                          CentOS-7 - Updates                                                                  4,053
+repolist: 14,642
+....
+
+Now that the repository has been confirmed enabled, install the convert2rhel utility:
+
+[source,bash,options="nowrap"]
+----
+yum install -y convert2rhel
+----
+
+[,]
+....
+
+# yum install -y convert2rhel
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: ftp.pasteur.fr
+ * extras: centos.mirror.ate.info
+ * updates: ftp.pasteur.fr
+Resolving Dependencies
+--> Running transaction check
+
+... output truncated ...
+
+Installed:
+  convert2rhel.noarch 0:0.26-1.el7
+
+Dependency Installed:
+  libxml2-python.x86_64 0:2.9.1-6.el7_9.6  pexpect.noarch 0:2.3-11.el7             python-backports.x86_64 0:1.0-8.el7  python-backports-ssl_match_hostname.noarch 0:3.5.0.1-1.el7
+  python-chardet.noarch 0:2.2.1-3.el7      python-ipaddress.noarch 0:1.0.16-2.el7  python-kitchen.noarch 0:1.1.1-5.el7  python-setuptools.noarch 0:0.9.8-7.el7
+  python-six.noarch 0:1.9.0-2.el7          yum-utils.noarch 0:1.1.31-54.el7_8
+
+Complete!
+....
+
+In the next step, you will begin the conversion process.
+= Understanding the Convert2RHEL command
+:difficulty: basic
+:doctype: book
+:id: 5loxag2y1kvy
+:notes: [{"type"=>"text", "contents"=>"With your CentOS Linux system prepared for conversion, you will now run the convert2rhel utility.\n"}]
+:slug: step3
+:tabs: [{"title"=>"RHEL", "type"=>"terminal", "hostname"=>"host"}, {"title"=>"RHEL2", "type"=>"terminal", "hostname"=>"host2"}]
+:timelimit: 600
+:type: challenge
+
+There are several different combinations of arguments that can be used to execute the conversion process.
+The main factor is registering your new RHEL system with an active subscription.
+Your choices are:
+
+1) Fully interactive session: answer questions and input username and password as part of the conversion
+
+2) Including your username and password in the convert2rhel command.
+This is less desireable since your Red Hat customer portal credentials would then be stored in the server's Bash history in plain text.
+
+3) Including your organization ID and Activation Key as part of the command.
+This is more secure, however, finding your org-id and creating an activation key are outside the scope of this lab.
+
+= Running the Convert2RHEL utility
+
+In order to automate this process as much as possible, you will kick off the conversion using the activation key combination from #3 above: convert2rhel --org +++<organization_ID>+++--activationkey +++<activation_key>++++++</activation_key>++++++</organization_ID>+++
+
+[source,bash,options="nowrap"]
+----
+convert2rhel --org 12451665 --activationkey convert2rhel
+----
+
+NOTE: This process will take some time!
+
+[,]
+....
+
+# convert2rhel --org 12451665 --activationkey convert2rhel
+
+[07/22/2022 18:40:54] TASK - [Prepare: Show Red Hat software EULA] ******************************
+The following text is a copy of the November 18, 2019 version of Red Hat GPLv2-Based End User License Agreement (EULA) [1].
+For up-to-date version of the EULA, visit [2].
+[1] https://www.redhat.com/licenses/Red_Hat_GPLv2-Based_EULA_20191118.pdf
+[2] https://www.redhat.com/en/about/agreements
+
+... output truncated ...
+
+Package                                                  Vendor/Packager  Repository
+-------                                                  ---------------  ----------
+epel-release-7-14.noarch                                 Fedora Project   /epel-release-latest-7.noarch
+google-compute-engine-oslogin-20220714.00-g1.el7.x86_64  N/A              google-compute-engine
+google-guest-agent-20220713.00-g1.el7.x86_64             N/A              google-compute-engine
+google-compute-engine-20220211.00-g1.el7.noarch          N/A              google-compute-engine
+gce-disk-expand-20200716.00-g1.el7.x86_64                N/A              google-compute-engine
+google-osconfig-agent-20220711.00-g1.el7.x86_64          N/A              google-compute-engine
+google-cloud-sdk-396.0.0-1.x86_64                        N/A              google-cloud-sdk
+
+
+Continue with the system conversion? [y/n]:
+....
+
+You'll be asked to confirm several the process at several steps.
+Type a `y` and hit enter to continue the process.
+
+[,]
+....
+
+
+... output truncated ...
+
+[07/22/2022 18:42:43] TASK - [Convert: Final system checks before main conversion] **************
+Comparing the loaded kernel modules with the modules available in the following RHEL kernel packages available in the enabled repositories:
+
+... output truncated ...
+
+[07/22/2022 18:48:33] TASK - [Final: Remove temporary folder /var/lib/convert2rhel/] ************
+Temporary folder /var/lib/convert2rhel/ removed
+
+Conversion successful!
+
+WARNING - In order to boot the RHEL kernel, restart of the system is needed.
+....
+
+Now that the conversion has been staged successfully, you will need to reboot the system in order to put the changes into effect.
+
+____
+*Pro Tip:* The above process can be automated by adding a `-y` argument to your command!
+____
+
+[,]
+....
+
+# convert2rhel --org 12451665 --activationkey convert2rhel -y
+....
+
+----
+reboot
+----
+
+With the convert2rhel utility running, the system will now replace the CentOS signed packages with Red Hat signed versions.
+The system will reboot a few times first to boot into a temporary environment from which to make these changes, a second time to perform a relabel on SELinux contexts, and a final time in order to boot into the newly created RHEL environment.
+
+____
+*Disclaimer:* This process will take some time, you can watch it through to completion, or tab RHEL2 has a second system that has been running a conversion in the background.
+The remaining steps can be executed on that system:
+____
+
+First, verify that the system is in fact running Red Hat Enterprise Linux:
+
+----
+cat /etc/redhat-release
+----
+
+[,]
+....
+
+# cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 7.9 (Maipo)
+....
+
+Verify that the necessary Red Hat repositories are enabled.
+Also, note that none of the old CentOS repos are available:
+
+----
+yum repolist
+----
+
+[,]
+....
+
+# yum repolist
+Loaded plugins: fastestmirror, product-id, search-disabled-repos, subscription-manager
+Loading mirror speeds from cached hostfile
+convert2rhel-for-rhel-7-rpms                                                                                                                                                                                               | 3.8 kB  00:00:00
+rhel-7-server-rpms                                                                                                                                                                                                         | 3.5 kB  00:00:00
+(1/3): convert2rhel-for-rhel-7-rpms/group                                                                                                                                                                                  |  124 B  00:00:00
+(2/3): convert2rhel-for-rhel-7-rpms/primary_db                                                                                                                                                                             | 3.9 kB  00:00:00
+(3/3): convert2rhel-for-rhel-7-rpms/updateinfo                                                                                                                                                                             | 3.2 kB  00:00:00
+repo id                                                                                                           repo name                                                                                                                 status
+convert2rhel-for-rhel-7-rpms                                                                                      Convert2RHEL for OS 7                                                                                                          5
+rhel-7-server-rpms/7Server/x86_64                                                                                 Red Hat Enterprise Linux 7 Server (RPMs)                                                                                  33,153
+repolist: 33,158
+....
+
+Now you can review the logs from the conversion itself:
+
+[source,bash,options="nowrap"]
+----
+less /var/log/convert2rhel/convert2rhel.log
+----
+
+[,]
+....
+
+# less /var/log/convert2rhel/convert2rhel.log
+
+[07/22/2022 17:55:00] TASK - [Prepare: Show Red Hat software EULA] ******************************
+The following text is a copy of the November 18, 2019 version of Red Hat GPLv2-Based End User License Agreement (EULA) [1].
+For up-to-date version of the EULA, visit [2].
+[1] https://www.redhat.com/licenses/Red_Hat_GPLv2-Based_EULA_20191118.pdf
+[2] https://www.redhat.com/en/about/agreements
+
+... output truncated ...
+....
