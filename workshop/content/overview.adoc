@@ -9,21 +9,22 @@ The following content is an example of what to include in an overview.
 
 === Lab Access
 
-You can access your lab environment as {user} with password "{ssh_password}" with the following command:
+You can access your lab environment as %user% with password %ssh_password% with the following command:
 
-[source,bash,options="nowrap",subs="{markup-in-source}"]
+[source,bash,role=execute]
 ----
 %ssh_command%
 ----
 
 ----
+
 [subs=attributes]
 ++++
 <a href="#" onclick="parent.send_to_terminal('openshift-install create install-config --dir $HOME/cluster-{guid}', 1); return false;">Run it!</a>
 ++++
 ----
 
-Your lab GUID is "{guid}".
+Your lab GUID is %guid%.
 
 An example var was set to %example_var%.
 
@@ -70,6 +71,7 @@ As your CentOS server is not subscribed to the Red Hat CDN, you will need to ena
 
 First, you will pull down the GPG signing key:
 
+[source,bash,options="nowrap"]
 ----
 curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/security/data/fd431d51.txt
 ----
@@ -85,6 +87,7 @@ curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/secur
 
 Second, download the SSL certificate:
 
+[source,bash,options="nowrap"]
 ----
 curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/convert2rhel/redhat-uep.pem
 ----
@@ -100,6 +103,7 @@ curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/
 
 Thirdly, download the convert2rhel repository file:
 
+[source,bash,options="nowrap"]
 ----
 curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert2rhel/7/convert2rhel.repo
 ----
@@ -112,6 +116,7 @@ curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert
                                  Dload  Upload   Total   Spent    Left  Speed
 100   247  100   247    0     0    509      0 --:--:-- --:--:-- --:--:--   510
 ....
+
 = Installing the Convert2RHEL utility
 :difficulty: basic
 :id: 1xt3c7zvsueu
@@ -123,6 +128,7 @@ curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert
 
 Before you begin the installation process, verify that you are running CentOS Linux and on the latest minor version.
 
+[source,bash,options="nowrap"]
 ----
 cat /etc/centos-release
 ----
@@ -138,6 +144,7 @@ In the previous step, you enabled the Convert2RHEL software repository.
 That gave your CentOS Linux server access to the convert2rhel RPM package and its dependencies from the Red Hat CDN.
 Verify that the Convert2RHEL repo is enabled:
 
+[source,bash,options="nowrap"]
 ----
 yum repolist
 ----
@@ -161,6 +168,7 @@ repolist: 14,642
 
 Now that the repository has been confirmed enabled, install the convert2rhel utility:
 
+[source,bash,options="nowrap"]
 ----
 yum install -y convert2rhel
 ----
@@ -217,6 +225,7 @@ This is more secure, however, finding your org-id and creating an activation key
 
 In order to automate this process as much as possible, you will kick off the conversion using the activation key combination from #3 above: convert2rhel --org +++<organization_ID>+++--activationkey +++<activation_key>++++++</activation_key>++++++</organization_ID>+++
 
+[source,bash,options="nowrap"]
 ----
 convert2rhel --org 12451665 --activationkey convert2rhel
 ----
@@ -335,6 +344,7 @@ repolist: 33,158
 
 Now you can review the logs from the conversion itself:
 
+[source,bash,options="nowrap"]
 ----
 less /var/log/convert2rhel/convert2rhel.log
 ----
