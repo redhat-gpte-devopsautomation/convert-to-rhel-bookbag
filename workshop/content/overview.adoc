@@ -16,6 +16,13 @@ You can access your lab environment as {user} with password "{ssh_password}" wit
 %ssh_command%
 ----
 
+----
+[subs=attributes]
+++++
+<a href="#" onclick="parent.send_to_terminal('openshift-install create install-config --dir $HOME/cluster-{guid}', 1); return false;">Run it!</a>
+++++
+----
+
 Your lab GUID is "{guid}".
 
 An example var was set to %example_var%.
