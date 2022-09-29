@@ -1,7 +1,6 @@
 :guid: %guid%
 :user: devops
 :user_password: %ssh_password%
-:markup-in-source: verbatim,attributes,quotes
 :numbered:
 :lab_name: Convert To RHEL
 
