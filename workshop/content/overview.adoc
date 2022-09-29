@@ -1,6 +1,5 @@
 :guid: %guid%
 :user: devops
-:user_password: %ssh_password%
 :numbered:
 :lab_name: Convert To RHEL
 
@@ -15,7 +14,7 @@ In this workshop you will... to be completed by the workshop developer.
 +
 [source,bash,role=execute]
 ----
-{ssh_command}
+%ssh_password%
 ----
 
 . Switch to root user.
