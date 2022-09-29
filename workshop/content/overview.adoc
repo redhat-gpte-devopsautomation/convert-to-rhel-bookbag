@@ -14,7 +14,7 @@ In this workshop you will... to be completed by the workshop developer.
 +
 [source,bash,role=execute]
 ----
-%ssh_password%
+%ssh_command%
 ----
 
 . Switch to root user.
