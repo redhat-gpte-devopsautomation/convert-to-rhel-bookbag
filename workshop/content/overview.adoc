@@ -1,6 +1,11 @@
 :guid: %guid%
 :user: %user%
+:user_password: %ssh_password%
 :markup-in-source: verbatim,attributes,quotes
+:numbered:
+:lab_name: Convert_to_RHEL
+
+= {lab_name}
 
 == Overview
 
@@ -9,38 +14,30 @@ The following content is an example of what to include in an overview.
 
 === Lab Access
 
-You can access your lab environment as %user% with password %ssh_password% with the following command:
+. You can access your lab environment as %user% with password %ssh_password% with the following command:
 
++
 [source,bash,role=execute]
 ----
 %ssh_command%
 ----
 
-----
-
-[subs=attributes]
-++++
-<a href="#" onclick="parent.send_to_terminal('openshift-install create install-config --dir $HOME/cluster-{guid}', 1); return false;">Run it!</a>
-++++
-----
-
++
 Your lab GUID is %guid%.
-
++
 An example var was set to %example_var%.
 
 === Workshop Information
 
-Informational messages generated for your workshop:
-
+. Informational messages generated for your workshop:
++
 [source,bash,options="nowrap"]
 ----
 %user_info_messages%
 ----
-:doctype: book
 
-'''
 
-slug: step1 id: ujri9ug22z4k type: challenge title: Step 1 notes:
+. slug: step1 id: ujri9ug22z4k type: challenge title: Step 1 notes:
 
 * type: text contents: |   # Goal:   After completing this scenario, users will be able to convert a CentOS Linux instance to a Red Hat Enterprise Linux instance.
 +
@@ -55,7 +52,7 @@ tabs:
 
 * title: Terminal type: terminal hostname: host difficulty: basic timelimit: 600 --
 
-= What is Convert2RHEL
+== What is Convert2RHEL
 
 Convert2RHEL is a command line utility that allows for self-service migration between RHEL-like distributions to officially supported Red Hat Enterprise Linux instances.
 
@@ -63,61 +60,59 @@ The convert2rhel tool handles subscribing the target system to your Red Hat cust
 
 Convert2RHEL is also a supported operation which means if you run into issues with the conversion process, you can open a ticket with Red Hat Support.
 
-= Enabling the Convert2RHEL repository
+== Enabling the Convert2RHEL repository
 
-The Convert2RHEL RPM is an offical Red Hat package.
-Therefore it is readily availble from the Red Hat software repository (CDN).
-As your CentOS server is not subscribed to the Red Hat CDN, you will need to enable the Convert2RHEL repository.
+The Convert2RHEL RPM is an offical Red Hat package. Therefore it is readily availble from the Red Hat software repository (CDN). As your CentOS server is not subscribed to the Red Hat CDN, you will need to enable the Convert2RHEL repository.
 
-First, you will pull down the GPG signing key:
+. You will need pull down the GPG signing key:
 
++
 [source,bash,options="nowrap"]
 ----
 curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/security/data/fd431d51.txt
 ----
-
-[,]
-....
-
-# curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/security/data/fd431d51.txt
++
+.Sample Output
+[source,txtinfo]
+----
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  1855  100  1855    0     0   2324      0 --:--:-- --:--:-- --:--:--  2324
-....
+----
 
-Second, download the SSL certificate:
-
+. Now, download the SSL certificate:
++
 [source,bash,options="nowrap"]
 ----
 curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/convert2rhel/redhat-uep.pem
 ----
 
-[,]
-....
-
-# curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/convert2rhel/redhat-uep.pem
++
+.Sample Output
+[source,txtinfo]
+----
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100  7411  100  7411    0     0  15260      0 --:--:-- --:--:-- --:--:-- 15280
-....
+----
 
-Thirdly, download the convert2rhel repository file:
-
+. Download the convert2rhel repository file:
++
 [source,bash,options="nowrap"]
 ----
 curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert2rhel/7/convert2rhel.repo
 ----
 
-[,]
-....
-
-# curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert2rhel/7/convert2rhel.repo
++
+.Sample Output
+[source,txtinfo]
+----
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 100   247  100   247    0     0    509      0 --:--:-- --:--:-- --:--:--   510
-....
+----
 
-= Installing the Convert2RHEL utility
+== Installing the Convert2RHEL utility
 :difficulty: basic
 :id: 1xt3c7zvsueu
 :notes: [{"type"=>"text", "contents"=>"Now that the requisite repository is enabled on your CentOS Linux system, it is time to install the Convert2RHEL utility and prepare the system for conversion.\n"}]
@@ -126,33 +121,33 @@ curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert
 :timelimit: 600
 :type: challenge
 
-Before you begin the installation process, verify that you are running CentOS Linux and on the latest minor version.
+. Before you begin the installation process, verify that you are running CentOS Linux and on the latest minor version.
 
++
 [source,bash,options="nowrap"]
 ----
 cat /etc/centos-release
 ----
 
-[,]
-....
-
-# cat /etc/centos-release
++
+.Sample Output
+[source,txtinfo]
+----
 CentOS Linux release 7.9.2009 (Core)
-....
+----
 
-In the previous step, you enabled the Convert2RHEL software repository.
+. In the previous step, you enabled the Convert2RHEL software repository.
 That gave your CentOS Linux server access to the convert2rhel RPM package and its dependencies from the Red Hat CDN.
 Verify that the Convert2RHEL repo is enabled:
-
++
 [source,bash,options="nowrap"]
 ----
 yum repolist
 ----
-
-[,]
-....
-
-# yum repolist
++
+.Sample Output
+[source,txtinfo]
+----
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
  * base: ftp.pasteur.fr
@@ -164,19 +159,21 @@ convert2rhel-for-rhel-7-rpms                                                    
 extras/7/x86_64                                                                           CentOS-7 - Extras                                                                     512
 updates/7/x86_64                                                                          CentOS-7 - Updates                                                                  4,053
 repolist: 14,642
-....
+----
 
-Now that the repository has been confirmed enabled, install the convert2rhel utility:
 
+. Now that the repository has been confirmed enabled, install the convert2rhel utility:
+
++
 [source,bash,options="nowrap"]
 ----
 yum install -y convert2rhel
 ----
 
-[,]
-....
-
-# yum install -y convert2rhel
++
+.Sample Output
+[source,txtinfo]
+----
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
  * base: ftp.pasteur.fr
@@ -196,10 +193,12 @@ Dependency Installed:
   python-six.noarch 0:1.9.0-2.el7          yum-utils.noarch 0:1.1.31-54.el7_8
 
 Complete!
-....
+----
++
 
 In the next step, you will begin the conversion process.
-= Understanding the Convert2RHEL command
+
+== Understanding the Convert2RHEL command
 :difficulty: basic
 :doctype: book
 :id: 5loxag2y1kvy
@@ -221,7 +220,7 @@ This is less desireable since your Red Hat customer portal credentials would the
 3) Including your organization ID and Activation Key as part of the command.
 This is more secure, however, finding your org-id and creating an activation key are outside the scope of this lab.
 
-= Running the Convert2RHEL utility
+== Running the Convert2RHEL utility
 
 In order to automate this process as much as possible, you will kick off the conversion using the activation key combination from #3 above: convert2rhel --org +++<organization_ID>+++--activationkey +++<activation_key>++++++</activation_key>++++++</organization_ID>+++
 
