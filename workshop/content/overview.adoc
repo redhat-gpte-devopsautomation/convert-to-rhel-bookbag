@@ -1,5 +1,5 @@
 :guid: %guid%
-:user: %user%
+:user: devops
 :user_password: %ssh_password%
 :markup-in-source: verbatim,attributes,quotes
 :numbered:
@@ -10,36 +10,40 @@
 
 == Overview
 In this workshop you will... to be completed by the workshop developer.
-The following content is an example of what to include in an overview.
 
 === Lab Access
-. You can access your lab environment as %user% with password %ssh_password% with the following command:
+. You can access your lab environment as *{user}* with password *%ssh_password%* with the following command.
 +
 [source,bash,role=execute]
 ----
-%ssh_command%
+{ssh_command}
 ----
 
-
+. Switch to root user.
++
+[source,bash,role=execute]
+----
+sudo su -
+----
 
 == Enabling the Convert2RHEL repository
 The Convert2RHEL RPM is an offical Red Hat package. Therefore it is readily availble from the Red Hat software repository (CDN). As your CentOS server is not subscribed to the Red Hat CDN, you will need to enable the Convert2RHEL repository.
 
-. You will need pull down the GPG signing key:
+. You need to pull down the GPG signing key.
 +
 [source,bash,role=execute]
 ----
 curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/security/data/fd431d51.txt
 ----
 
-. Now, download the SSL certificate:
+. Download the SSL certificate.
 +
 [source,bash,role=execute]
 ----
 curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/convert2rhel/redhat-uep.pem
 ----
 
-. Download the convert2rhel repository file:
+. Download the convert2rhel repository file.
 +
 [source,bash,role=execute]
 ----
@@ -51,26 +55,21 @@ curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert
  
 Now that the requisite repository is enabled on your CentOS Linux system, it is time to install the Convert2RHEL utility and prepare the system for conversion.
 
-
 . Before you begin the installation process, verify that you are running CentOS Linux and on the latest minor version.
-
 +
 [source,bash,role=execute]
 ----
 cat /etc/centos-release
 ----
 
-. In the previous step, you enabled the Convert2RHEL software repository.
-That gave your CentOS Linux server access to the convert2rhel RPM package and its dependencies from the Red Hat CDN.
-Verify that the Convert2RHEL repo is enabled:
+. Verify that the Convert2RHEL repo is enabled.
 +
 [source,bash,role=execute]
 ----
 yum repolist
 ----
 
-. Now that the repository has been confirmed enabled, install the convert2rhel utility:
-
+. Install the convert2rhel utility.
 +
 [source,bash,role=execute]
 ----
@@ -78,73 +77,41 @@ yum install -y convert2rhel
 ----
 
 
-. In the next step, you will begin the conversion process.
-
 == Running the Convert2RHEL utility
 
-In order to automate this process as much as possible, you will kick off the conversion using the activation key combination from 
-
-// #3 above: convert2rhel --org +++<organization_ID>+++--activationkey +++<activation_key>++++++</activation_key>++++++</organization_ID>+++
-
+. In order to automate this process, you need to use activation key in  the conversion command.
 +
-[source,bash,role=execute]
-----
-convert2rhel --org 12451665 --activationkey convert2rhel
-----
-
-
-NOTE: This process will take some time!
-
-. You'll be asked to confirm several the process at several steps.
-Type a `y` and hit enter to continue the process.
-
-
-. Now that the conversion has been staged successfully, you will need to reboot the system in order to put the changes into effect.
-
-____
-*Pro Tip:* The above process can be automated by adding a `-y` argument to your command!
-____
-
-+
-.Alternative
 [source,bash,role=execute]
 ----
 convert2rhel --org 12451665 --activationkey convert2rhel -y
 ----
 
-. Now reboot the system:
++
+NOTE: This process takes some time! The above process ask to confirm at several steps. Adding a `-y` as an argument will automate the input. Durging conversion the system will reboot for few times.
+
+
+. Now that the conversion has been staged successfully, you will need to reboot the system in order to put the changes into effect.
 +
 [source,bash,role=execute]
 ----
 reboot
 ----
 
-. With the convert2rhel utility running, the system will now replace the CentOS signed packages with Red Hat signed versions.
-The system will reboot a few times first to boot into a temporary environment from which to make these changes, a second time to perform a relabel on SELinux contexts, and a final time in order to boot into the newly created RHEL environment.
-
-____
-*Disclaimer:* This process will take some time, you can watch it through to completion, or tab RHEL2 has a second system that has been running a conversion in the background.
-The remaining steps can be executed on that system:
-____
-
-. Now, verify that the system is in fact running Red Hat Enterprise Linux:
+. Verify the system is running on Red Hat Enterprise Linux.
 +
 [source,bash,role=execute]
 ----
 cat /etc/redhat-release
 ----
 
-. Verify that the necessary Red Hat repositories are enabled.
-Also, note that none of the old CentOS repos are available:
-
+. Verify that the necessary Red Hat repositories are enabled. Also, note that none of the old CentOS repos are available.
 +
 [source,bash,role=execute]
 ----
 yum repolist
 ----
 
-
-. Now you can review the logs from the conversion itself:
+. Now you can review the logs from the conversion itself.
 +
 [source,bash,role=execute]
 ----
