@@ -7,7 +7,7 @@
 
 
 == Overview
-In this workshop you will... to be completed by the workshop developer.
+In this workshop you will convert a Centos 7 system into a Red Hat Enterprise Linux 7 system.
 
 === Lab Access
 . You can access your lab environment as *{user}* with password *%ssh_password%* with the following command.
