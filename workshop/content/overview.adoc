@@ -9,6 +9,20 @@
 == Overview
 In this workshop you will convert a Centos 7 system into a Red Hat Enterprise Linux 7 system.
 
+== Presentation of Materials
+
+You are viewing a landing page called the *Dashboard*. The dashboard has the instructions and a terminal side by side.
+
+This demo is designed to show the customer a separate terminal window with the presenter working from the dashboard.
+
+NOTE: The dashboard terminal and the projected terminal are mirrored. Whatever you type in the dashboard terminal will be replicated on the terminal window shared with customers.
+
+Deploy mirrored terminal window:
+
+. Click the three horizontal bars at the upper right-hand corner of the dashboard and select *Open Terminal* 
+
+. Click and drag the browser tab to separate the window if needed
+
 === Lab Access
 . You can access your lab environment as *{user}* with password *%ssh_password%* with the following command.
 +
