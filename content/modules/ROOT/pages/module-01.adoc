@@ -1,149 +1,131 @@
-= Building an Application with rpms
+:guid: %guid%
+:user: devops
+:numbered:
+:lab_name: Convert To RHEL
 
-== Downloading the UBI
+= {lab_name}
 
-In this lab, you will be installing software into the container 
-image running as an interactive application. To do this you will
-need `yum`, but do not need `systemd` for managing services within the
-container environment.  For that reason, you will be using the *Standard*
-UBI image (as opposed to the Minimal or Multi-service images).
 
-Using the "buildah from" command will download and meld the container image. This particular image we are using is the Red Hat Universal Base Image or UBI. From the ourput of the command, you will notice that we are pulling down the latest one, which is for RHEL 9. 
+== Overview
+In this workshop you will convert a Centos 7 system into a Red Hat Enterprise Linux 7 system.
 
-. Execute the  download the Standard UBI
-image from Red Hat's registry.
+== Presentation of Materials
 
+You are viewing a landing page called the *Dashboard*. The dashboard has the instructions and a terminal side by side.
+
+This demo is designed to show the customer a separate terminal window with the presenter working from the dashboard.
+
+NOTE: The dashboard terminal and the projected terminal are mirrored. Whatever you type in the dashboard terminal will be replicated on the terminal window shared with customers.
+
+Deploy mirrored terminal window:
+
+. Click the three horizontal bars at the upper right-hand corner of the dashboard and select *Open Terminal* 
+
+. Click and drag the browser tab to separate the window if needed
+
+=== Lab Access
+. You can access your lab environment as *{user}* with password *%ssh_password%* with the following command.
 +
-[source,sh,role=execute]
+[source,bash,role=execute]
 ----
-buildah from registry.access.redhat.com/ubi9/ubi
+%ssh_command%
 ----
 
-[#repositories]
-== Installing Repositories
-In this lab, you are going to containerize a software package that is already
-packaged in RPM format and stored in the Extra Packages for Enterprise Linux
-(EPEL) repository.
-
-Software often has requirements for prerequisite software that must be installed
-on the machine for it to work properly.  `yum` will resolve those
-dependencies for you, as long as it can locate the required packages in
-repositories defined on the machine.  The Red Hat Universal Base Image (UBI)
-downloaded in the previous step has access to some Red Hat Enterprise Linux
-repositories.  However, the target package for the lab is from EPEL.  
-
-. In the command below, `buildah` is going to run a command on the
-`ubi-working-container` image.  The `--` indicates that the command should be
-executed from within the container, which means the results will be applied into
-the container image.  Lastly, you are providing the `yum` command to install a
-package that defines all of the repositories from EPEL, `epel-release-latest-9`.
-
+. Switch to root user.
 +
-[source,bash]
+[source,bash,role=execute]
 ----
-buildah run ubi-working-container -- yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+sudo su -
 ----
 
+== Enabling the Convert2RHEL repository
+The Convert2RHEL RPM is an offical Red Hat package. Therefore it is readily availble from the Red Hat software repository (CDN). As your CentOS server is not subscribed to the Red Hat CDN, you will need to enable the Convert2RHEL repository.
 
-. You can verify that the above command did not install the RPM on the host system.
-
+. You need to pull down the GPG signing key.
 +
-[source,bash]
+[source,bash,role=execute]
 ----
-rpm -q epel-release
+curl -o /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release https://www.redhat.com/security/data/fd431d51.txt
 ----
 
-NOTE: If your repository configurations are not distributed as an RPM, but instead as
-individual `.repo` files, you could use the `buildah copy` command to copy
-files from the host operating system into the container image.  You will see
-an example of using `buildah copy` later in this lab.
-
-[#software]
-== Installing Software
-
-
-. Now that the yum repositories are defined within the container, execute 
-another `yum install`, within the container, to install the target
-software: `moon-buggy`.
-
+. Download the SSL certificate.
 +
-[source,bash]
+[source,bash,role=execute]
 ----
-buildah run ubi-working-container -- yum -y install moon-buggy
+curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/convert2rhel/redhat-uep.pem
 ----
 
-
-== Committing the Container Image
-
-. At this point, the container is configured.  It is time to transition from a
-working container into a committed image.  In the command below, you will use
-the `buildah` command to commit the working container to an image called:
-`moon-buggy`.
-
+. Download the convert2rhel repository file.
 +
-[source,bash]
+[source,bash,role=execute]
 ----
-buildah commit ubi-working-container moon-buggy
+curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert2rhel/7/convert2rhel.repo
 ----
 
+
+== Installing the Convert2RHEL utility
+ 
+Now that the requisite repository is enabled on your CentOS Linux system, it is time to install the Convert2RHEL utility and prepare the system for conversion.
+
+. Before you begin the installation process, verify that you are running CentOS Linux and on the latest minor version.
 +
-. The output of `podman image list` should confirm the image was created.
+[source,bash,role=execute]
+----
+cat /etc/centos-release
+----
 
+. Verify that the Convert2RHEL repo is enabled.
 +
-[source,bash]
+[source,bash,role=execute]
 ----
-podman image list
+yum repolist
 ----
 
-
-== Deploy the Container
-
-Now the software has been installed and a new container image created.  It is
-time to spawn a runtime of the container image and validate the software.  The
-software we are using is a command line command.  
-
-. When you `run` the container,
-it will be in interactive (`-it`) mode, based on the `moon-buggy` container
-image and the command run interactively will be `/usr/bin/moon-buggy`.
-
+. Install the convert2rhel utility.
 +
-[source,bash]
+[source,bash,role=execute]
 ----
-podman run -it moon-buggy /usr/bin/moon-buggy
+yum install -y convert2rhel
+----
+
+
+== Running the Convert2RHEL utility
+
+. In order to automate this process, you need to use activation key in  the conversion command.
++
+[source,bash,role=execute]
+----
+convert2rhel --org 12451665 --activationkey convert2rhel -y
 ----
 
 +
-[source,textinfo]
-----
+NOTE: This process takes some time! The above process ask to confirm at several steps. Adding a `-y` as an argument will automate the input. Durging conversion the system will reboot for few times.
 
-<<< OUTPUT ABRIDGED >>>
-               MM     MM   OOOOO    OOOOO   NN     N
-               M M   M M  O     O  O     O  N N    N
-               M  M M  M  O     O  O     O  N  N   N
-               M   M   M  O     O  O     O  N   N  N
-               M       M  O     O  O     O  N    N N
-               M       M   OOOOO    OOOOO   N     NN
 
-                     BBBBBB   U     U   GGGGG    GGGGG   Y     Y
-                     B     B  U     U  G     G  G     G   Y   Y
-                     BBBBBB   U     U  G        G          Y Y
-                     B     B  U     U  G   GGG  G   GGG     Y
-                     B     B  U     U  G     G  G     G    Y
-                     BBBBBB    UUUUU    GGGGG    GGGGG   YY
-
-<<< OUTPUT ABRIDGED >>>
-----
-
-. You can now play the Moon Buggy game, which is a text-based version of the
-popular Moon Patrol.  When you are finished, use the `q` command to quit the
-game, which will terminate the container.
-
+. Now that the conversion has been staged successfully, you will need to reboot the system in order to put the changes into effect.
 +
-Alternatively, you can use `podman` to kill the running container from
-*Terminal 2*.
-
-+
-[source,bash]
+[source,bash,role=execute]
 ----
-podman kill $(podman ps | grep -v CONTAINER | cut -f1 -d" " )
+reboot
+----
+
+. Verify the system is running on Red Hat Enterprise Linux.
++
+[source,bash,role=execute]
+----
+cat /etc/redhat-release
+----
+
+. Verify that the necessary Red Hat repositories are enabled. Also, note that none of the old CentOS repos are available.
++
+[source,bash,role=execute]
+----
+yum repolist
+----
+
+. Now you can review the logs from the conversion itself.
++
+[source,bash,role=execute]
+----
+less /var/log/convert2rhel/convert2rhel.log
 ----

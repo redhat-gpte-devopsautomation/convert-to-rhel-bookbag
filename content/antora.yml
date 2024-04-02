@@ -1,6 +1,6 @@
 ---
 name: modules
-title: Sample Module Title
+title: CentOS end of Life - RHEL on Azure
 version: master
 nav:
   - modules/ROOT/nav.adoc
