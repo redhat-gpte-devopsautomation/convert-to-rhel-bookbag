@@ -1,10 +1,6 @@
-:guid: %guid%
-:user: devops
 :numbered:
-:lab_name: Convert To RHEL
 
-= {lab_name}
-
+= Convert To RHEL with Azure Arc
 
 == Overview
 In this workshop you will convert a Centos 7 system into a Red Hat Enterprise Linux 7 system.
