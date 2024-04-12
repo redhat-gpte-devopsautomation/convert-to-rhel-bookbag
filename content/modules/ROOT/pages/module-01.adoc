@@ -121,10 +121,10 @@ yum repolist
 yum install -y convert2rhel
 ----
 
-== Runn the Convert2RHEL utility
+== Run the Convert2RHEL utility
 
 . Before running the Convert2RHEL utility, you need to tell it to ignore the unknown or incompatible kernel modules.
-The MicroSoft kernel modules are not known to the conversion system.
+The Microsoft kernel modules are not known to the conversion system.
 Execute the following to put the override flag into your environment permanently.
 +
 [source,bash,role=execute]
