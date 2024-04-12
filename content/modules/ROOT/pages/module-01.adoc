@@ -58,6 +58,8 @@ id: 1 - Word: example 83
 
 == Run Azure Arc Commands on Both VMs
 
+Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Servers and OpenShift deployemnts that are deployed on-premsies or in mulit-cloud enviroments.
+
 . Switch to root user.
 +
 [source,bash,role=execute]
