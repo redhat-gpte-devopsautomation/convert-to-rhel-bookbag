@@ -79,7 +79,7 @@ cd /root
 ./deploy_arc.sh
 ----
 
-The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024. You can verify the agent and its depednacies are installed in the /opt/azcmagent/bin folder.
+The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024. You can verify the agent and its dependencies are installed in the /opt/azcmagent/bin folder.
 
 == Run the Convert2RHEL Commands on Both VMs
 
