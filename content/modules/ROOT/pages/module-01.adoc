@@ -211,5 +211,7 @@ image::../assets/images/Azure_Arc_Portal.jpg[55%,55%, align=center]
 
 . Notes from the field:
 
-* Convert2Rhel fails with 3rd party software.
-** Solution: `echo "CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc`
+* Convert2Rhel fails with 3rd party software which is not offically supported by Red Hat.
+
+** Solution 1: `echo "CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc`
+** Solution 2: `echo "CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP=1" >> ~/.bashrc`
