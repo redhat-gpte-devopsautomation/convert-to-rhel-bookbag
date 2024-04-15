@@ -207,7 +207,7 @@ NOTE: In order to log into the Azure portal, you will need user crednetials whic
 
 * Arc resource blade and find the Infrastructure section and click on Machines to find your VM's connected via Azure Arc
 
-image::../assets/images/Azure_Arc_Portal.jpg[Azure,55%,55%,align=center]
+image::../assets/images/Azure_Arc_Portal.jpg[Azure,55%,55%,align="center"]
 
 . Notes from the field:
 
