@@ -204,7 +204,8 @@ NOTE: In order to log into the Azure portal, you will need user crednetials whic
 
 . Logging into the Azure portal requires the use of Azure Authenticator which can be installed on your mobile device.
 . Once logged into the Azure portal you can navigate to a few key areas
-.. Arc resource blade and find the Infrastrcutre section and click on Machines to find your VM's connected via Azure Arc
+
+* Arc resource blade and find the Infrastructure section and click on Machines to find your VM's connected via Azure Arc
 
 image::../assets/images/Azure_Arc_Portal.jpg[Azure,55%,55%]
 
