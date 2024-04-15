@@ -14,10 +14,8 @@ In this lab you will:
 * Reboot VMs
 * Validate the Web App still work
 * Discuss security and conversion technical issues:
-** SE Linux prevents naive httpd to connect to Mysql.
-Solution: `setsebool -P httpd_can_network_connect_db=1`
-** Convert2Rhel fails when detecting some kernel modules.
-Solution: `echo "CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc`
+
+
 
 == Lab Access
 
@@ -58,7 +56,7 @@ id: 1 - Word: example 83
 
 == Run Azure Arc Commands on Both VMs
 
-Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Servers and OpenShift deployemnts that are deployed on-premsies or in mulit-cloud enviroments.
+Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Servers and OpenShift deployemnts that are deployed on-premsies or in mulit-cloud enviroments. For this lab we pre-created the installation script using a service principal that will connect the AWS VM to Azure Arc. Once the script is executed, the connected VM will display in the Azure portal.
 
 . Switch to root user.
 +
@@ -66,6 +64,22 @@ Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Se
 ----
 sudo -i
 ----
+
+. Change into the home directory of root
++
+[source,bash,role=execute]
+----
+cd /root
+----
+
+. Execute the Arc connection sript named deploy_arc.sh
++
+[source,bash,role=execute]
+----
+./deploy_arc.sh
+----
+
+The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024. You can verify the agent and its depednacies are installed in the /opt/azcmagent/bin folder.
 
 == Run the Convert2RHEL Commands on Both VMs
 
@@ -180,4 +194,21 @@ id: 1 - Word: example 83
 
 == Congratulations!
 
-You have converted from Centos to RHEL, and it's displayed in Arc.
+You have converted from Centos to RHEL, and it's displayed in Arc on the instrucot main screen.
+
+. Optional Lab
+
+Log into Azure portal.
+
+NOTE: In order to log into the Azure portal, you will need user crednetials which you can obtain from lab instrucotr or lab team mates.
+
+. Logging into the Azure portal requires the use of Azure Authenticator which can be installed on your mobile device.
+. Once logged into the Azure portal you can navigate to a few key areas
+.. Arc resource blade and find the Infrastrcutre section and click on Machines to find your VM's connected via Azure Arc
+
+image::Azure_Arc_Portal.jpg[Azure,55%,55%]
+
+. Notes from the field:
+
+* Convert2Rhel fails with 3rd party software.
+** Solution: `echo "CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc`
