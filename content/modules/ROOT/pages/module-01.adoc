@@ -13,7 +13,7 @@ In this lab you will:
 * Convert2Rhel both Centos VMs
 * Reboot VMs
 * Validate the Web App still work
-* Discuss security and conversion technical issues:
+* Discuss security and conversion technical issues
 
 
 
@@ -145,7 +145,7 @@ Execute the following to put the override flag into your environment permanently
 +
 [source,bash,role=execute]
 ----
-echo "CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc
+echo "export CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc
 ----
 
 . In order to automate this process, you need to use activation key in the conversion command.
