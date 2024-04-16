@@ -15,8 +15,6 @@ In this lab you will:
 * Validate the Web App still work
 * Discuss security and conversion technical issues
 
-
-
 == Lab Access
 
 . Access your *httpd server VM* with the following command.
@@ -51,8 +49,7 @@ In this lab you will:
 +
 Sample Output
 
-image::../assets/images/Northwind_Sample_Data.jpg[55%,55%, align=center]
-
+image::Northwind_Sample_Data.jpg[55%,55%, align=center]
 
 == Run Azure Arc Commands on Both VMs
 
@@ -87,8 +84,8 @@ Now we'll actually do the Centos to RHEL conversion.
 
 === Enabling the Convert2RHEL repository
 
-The Convert2RHEL RPM is an offical Red Hat package. 
-Therefore it is readily availble from the Red Hat software repository (CDN). 
+The Convert2RHEL RPM is an offical Red Hat package.
+Therefore it is readily availble from the Red Hat software repository (CDN).
 As your CentOS server is not subscribed to the Red Hat CDN, you will need to enable the Convert2RHEL repository.
 
 . Get the GPG signing key
@@ -113,7 +110,7 @@ curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert
 ----
 
 === Installing the Convert2RHEL utility
- 
+
 Now that the requisite repository is enabled on your CentOS Linux system, it is time to install the Convert2RHEL utility and prepare the system for conversion.
 
 . Before you begin the installation process, verify that you are running CentOS Linux and on the latest minor version.
@@ -146,28 +143,28 @@ Execute the following to put the override flag into your environment permanently
 +
 [source,bash,role=execute]
 ----
-echo "CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc
+echo "export CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc
 ----
 
 .. Skip Tainted Kernel Modules varaible
 +
 [source,bash,role=execute]
 ----
-echo "CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP=1" >> ~/.bashrc
+echo "export CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP=1" >> ~/.bashrc
 ----
 
 .. Skip Kernel Currencey Check varaible
 +
 [source,bash,role=execute]
 ----
-echo "CONVERT2RHEL_SKIP_KERNEL_CURRENCY_CHECK=1" >> ~/.bashrc
+echo "export CONVERT2RHEL_SKIP_KERNEL_CURRENCY_CHECK=1" >> ~/.bashrc
 ----
 
 .. Skip Outdated Package Check varaible
 +
 [source,bash,role=execute]
 ----
-echo "CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP=1" >> ~/.bashrc
+echo "export CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP=1" >> ~/.bashrc
 ----
 
 .. Now Load the variable(s) into the active shell
@@ -175,15 +172,7 @@ echo "CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP=1" >> ~/.bashrc
 +
 [source,bash,role=execute]
 ----
-source ~/.bash_profile
-----
-
-.. Now export the variables so they can be used by sub-process of the convert2rhel conversion utility
-
-+
-[source,bash,role=execute]
-----
-export CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP; export CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS; export CONVERT2RHEL_SKIP_KERNEL_CURRENCY_CHECK; export CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP
+source ~/.bashrc
 ----
 
 . In order to automate this process, you need to use activation key in the conversion command.
@@ -193,7 +182,7 @@ export CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP; export CONVERT2RHEL_ALLOW_
 convert2rhel --org 12451665 --activationkey convert2rhel -y
 ----
 +
-NOTE: This process takes some time! The above process ask to confirm at several steps. Adding a `-y` as an argument will automate the input. 
+NOTE: This process takes some time! The above process ask to confirm at several steps. Adding a `-y` as an argument will automate the input.
 
 . Now that the conversion has been deployed successfully, you will need to reboot the system in order to put the changes into effect.
 +
@@ -227,7 +216,7 @@ less /var/log/convert2rhel/convert2rhel.log
 +
 Sample Output
 
-image::../assets/images/Northwind_Sample_Data.jpg[55%,55%, align=center]
+image::Northwind_Sample_Data.jpg[55%,55%, align=center]
 
 == Congratulations!
 
@@ -246,7 +235,7 @@ NOTE: In order to log into the Azure portal, you will need user credentials whic
 
 image::../assets/images/Azure_Arc_Portal_A.png[55%,55%, align=center]
 
-* Once you have chosen a specfic VM from the Mahcines list, you can deploy additional extentions sush as Custom Script Extenstion for Linux, assign polices to the VM, or enable Monitor insights which will allow you to view and create reports such as VM performance and workload networkign mapping.   
+* Once you have chosen a specfic VM from the Mahcines list, you can deploy additional extentions sush as Custom Script Extenstion for Linux, assign polices to the VM, or enable Monitor insights which will allow you to view and create reports such as VM performance and workload networkign mapping.
 
 image::../assets/images/Azure_Arc_Portal_B.png[55%,55%, align=center]
 
