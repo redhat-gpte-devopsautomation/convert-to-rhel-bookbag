@@ -238,7 +238,7 @@ You have converted from Centos to RHEL, and it's displayed in Arc on the instruc
 
 Log into Azure portal.
 
-NOTE: In order to log into the Azure portal, you will need user crednetials which you can obtain from lab instrucotr or lab team mates.
+NOTE: In order to log into the Azure portal, you will need user credentials which you can obtain from lab instructors.
 
 . Logging into the Azure portal requires the use of Azure Authenticator which can be installed on your mobile device.
 . Once logged into the Azure portal you can navigate to a few key areas
