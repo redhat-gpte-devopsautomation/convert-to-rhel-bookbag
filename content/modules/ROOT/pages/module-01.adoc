@@ -46,7 +46,7 @@ In this lab you will:
 
 == Verify the Web App is Running
 
-. Browse to link:{web_app}[Sample Web App] to verify the web app is running.
+. Browse to link:{web_app}[Sample Web App^] to verify the web app is running.
 +
 .Sample Output
 +
@@ -212,7 +212,7 @@ yum repolist
 less /var/log/convert2rhel/convert2rhel.log
 ----
 
-. Verify the Web Application still functions by browsing to link:http://{web_app}[Sample Web App] to verify the web app is running.
+. Verify the Web Application still functions by browsing to link:http://{web_app}[Sample Web App^] to verify the web app is running.
 +
 .Sample Output
 +
