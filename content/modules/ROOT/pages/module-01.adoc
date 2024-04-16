@@ -168,7 +168,6 @@ echo "export CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP=1" >> ~/.bashrc
 ----
 
 .. Now Load the variable(s) into the active shell
-
 +
 [source,bash,role=execute]
 ----
@@ -216,7 +215,7 @@ less /var/log/convert2rhel/convert2rhel.log
 +
 Sample Output
 
-image::Northwind_Sample_Data.jpg[55%,55%, align=center]
+image::Northwind_Sample_Data.jpg[]
 
 == Congratulations!
 
