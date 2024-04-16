@@ -244,9 +244,11 @@ NOTE: In order to log into the Azure portal, you will need user credentials whic
 
 * Arc resource blade and find the Infrastructure section and click on Machines to find your VM's connected via Azure Arc
 
-image::../assets/images/Azure_Arc_Portal.jpg[55%,55%, align=center]
+image::../assets/images/Azure_Arc_Portal_A.jpg[55%,55%, align=center]
 
 * Once you have chosen a specfic VM from the Mahcines list, you can deploy additional extentions sush as Custom Script Extenstion for Linux, assign polices to the VM, or enable Monitor insights which will allow you to view and create reports such as VM performance and workload networkign mapping.   
+
+image::../assets/images/Azure_Arc_Portal_B.jpg[55%,55%, align=center]
 
 == Notes from the field:
 
