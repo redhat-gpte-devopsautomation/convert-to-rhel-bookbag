@@ -170,7 +170,7 @@ echo "CONVERT2RHEL_SKIP_KERNEL_CURRENCY_CHECK=1" >> ~/.bashrc
 echo "CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP=1" >> ~/.bashrc
 ----
 
-.. Now Load the varaible into the shell
+.. Now Load the variable(s) into the active shell
 
 +
 [source,bash,role=execute]
