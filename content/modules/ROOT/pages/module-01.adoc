@@ -213,8 +213,8 @@ less /var/log/convert2rhel/convert2rhel.log
 
 . Verify the Web Application still functions by browsing to http://{web_app_url}[Sample Web App] to verify the web app is running.
 +
-Sample Output
-
+.Sample Output
++
 image::Northwind_Sample_Data.jpg[]
 
 == Congratulations!
