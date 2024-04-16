@@ -46,7 +46,7 @@ In this lab you will:
 
 == Verify the Web App is Running
 
-. Browse to link:{web_app}[Sample Web App^] to verify the web app is running.
+. Browse to {web_app}[Sample Web App^] to verify the web app is running.
 +
 .Sample Output
 +
