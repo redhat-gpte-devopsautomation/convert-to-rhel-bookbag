@@ -51,7 +51,7 @@ In this lab you will:
 +
 .Sample Output
 ----
-id: 1 - Word: example 83
+image::../assets/images/Sample_Northwind_Data.jpg[55%,55%, align=center]
 ----
 
 == Run Azure Arc Commands on Both VMs
