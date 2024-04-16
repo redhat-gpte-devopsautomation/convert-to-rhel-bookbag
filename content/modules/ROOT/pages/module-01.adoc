@@ -1,5 +1,5 @@
 :numbered:
-:web_app: http\://{web_app_url}
+:web_app: http://{web_app_url}
 
 = Convert to RHEL with Azure Arc
 
