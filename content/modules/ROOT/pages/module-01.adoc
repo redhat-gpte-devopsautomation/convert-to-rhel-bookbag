@@ -232,13 +232,13 @@ NOTE: In order to log into the Azure portal, you will need user credentials whic
 +
 * Arc resource blade and find the Infrastructure section and click on Machines to find your VM's connected via Azure Arc
 +
-image::Azure_Arc_Portal_A.png[55%,55%, align=center]
+image::Azure_Arc_Portal_A.png[55%,55%,align=center]
 +
 * Once you have chosen a specfic VM from the Mahcines list, you can deploy additional extentions sush as Custom Script Extenstion for Linux, assign polices to the VM, or enable Monitor insights which will allow you to view and create reports such as VM performance and workload networkign mapping.
 +
-image::Azure_Arc_Portal_B.png[55%,55%, align=center]
+image::Azure_Arc_Portal_B.png[55%,55%,align=center]
 
-== Notes from the field:
+== Notes from the Field
 
 Convert2Rhel can fail to complete for a varity of reasons, such as 3rd party packages which are not offically supported by Red Hat. In some cases there will be just a simple warning that a specfic package will not be replaced during the conversion process and the converion process will still complete. It is recommneded to check to see if the package that was skipped to ensure proper operation after the conversion and the kernel is updated and loaded.
 
@@ -246,7 +246,7 @@ In other cases the conversion process will initiate a roll back to the state it 
 
 The most common enviromental variables:
 
-** Solution 1: `echo "CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc`
-** Solution 2: `echo "CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP=1" >> ~/.bashrc`
-** Solution 3: `echo "CONVERT2RHEL_SKIP_KERNEL_CURRENCY_CHECK=1" >> ~/.bashrc`
-** Solution 4: `echo "CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP=1" >> ~/.bashrc`
+** Solution 1: `echo "export CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc`
+** Solution 2: `echo "export CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP=1" >> ~/.bashrc`
+** Solution 3: `echo "export CONVERT2RHEL_SKIP_KERNEL_CURRENCY_CHECK=1" >> ~/.bashrc`
+** Solution 4: `echo "export CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP=1" >> ~/.bashrc`
