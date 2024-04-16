@@ -49,7 +49,7 @@ In this lab you will:
 
 . Browse to http://{web_app_url}[Sample Web App] to verify the web app is running.
 +
-.Sample Output
+Sample Output
 
 image::../assets/images/Northwind_Sample_Data.jpg[55%,55%, align=center]
 
