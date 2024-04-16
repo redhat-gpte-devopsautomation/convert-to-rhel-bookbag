@@ -142,10 +142,48 @@ yum install -y convert2rhel
 . Before running the Convert2RHEL utility, you need to tell it to ignore the unknown or incompatible kernel modules.
 The Microsoft kernel modules are not known to the conversion system.
 Execute the following to put the override flag into your environment permanently.
+.. Allow unknown Modules varaible
 +
 [source,bash,role=execute]
 ----
 echo "CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc
+----
+
+.. Skip Tainted Kernel Modules varaible
++
+[source,bash,role=execute]
+----
+echo "CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP=1" >> ~/.bashrc
+----
+
+.. Skip Kernel Currencey Check varaible
++
+[source,bash,role=execute]
+----
+echo "CONVERT2RHEL_SKIP_KERNEL_CURRENCY_CHECK=1" >> ~/.bashrc
+----
+
+.. Skip Outdated Package Check varaible
++
+[source,bash,role=execute]
+----
+echo "CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP=1" >> ~/.bashrc
+----
+
+.. Now Load the varaible into the shell
+
++
+[source,bash,role=execute]
+----
+source ~/.bash_profile
+----
+
+.. Now export the variables so they can be used by sub-process of the convert2rhel conversion utility
+
++
+[source,bash,role=execute]
+----
+export CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP; export CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS; export CONVERT2RHEL_SKIP_KERNEL_CURRENCY_CHECK; export CONVERT2RHEL_OUTDATED_PACKAGE_CHECK_SKIP
 ----
 
 . In order to automate this process, you need to use activation key in the conversion command.
