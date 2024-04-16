@@ -1,5 +1,5 @@
 :numbered:
-:web_app: http://{web_app_url}
+:web_app: http\://{web_app_url}
 
 = Convert to RHEL with Azure Arc
 
@@ -13,7 +13,7 @@ In this lab you will:
 * Install the Azure Arc client on both Centos VMs
 * Convert2Rhel both Centos VMs
 * Reboot VMs
-* Validate the Web App still work
+* Validate the Web App still works
 * Discuss security and conversion technical issues
 
 == Lab Access
@@ -46,11 +46,11 @@ In this lab you will:
 
 == Verify the Web App is Running
 
-. Browse to http://{web_app_url}[Sample Web App] to verify the web app is running.
+. Browse to link:{web_app}[Sample Web App] to verify the web app is running.
 +
 .Sample Output
 +
-image::Northwind_Sample_Data.jpg[55%,55%, align=center]
+image::Northwind_Sample_Data.jpg[align=center]
 
 == Run Azure Arc Commands on Both VMs
 
