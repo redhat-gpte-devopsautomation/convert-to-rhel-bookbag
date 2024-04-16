@@ -222,21 +222,21 @@ image::Northwind_Sample_Data.jpg[]
 You have converted from Centos to RHEL, and it's displayed in Arc on the instructors main screen.
 
 . Optional Lab
-
++
 Log into Azure portal.
-
++
 NOTE: In order to log into the Azure portal, you will need user credentials which you can obtain from lab instructors.
-
++
 . Logging into the Azure portal requires the use of Azure Authenticator which can be installed on your mobile device.
 . Once logged into the Azure portal you can navigate to a few key areas
-
++
 * Arc resource blade and find the Infrastructure section and click on Machines to find your VM's connected via Azure Arc
-
-image::../assets/images/Azure_Arc_Portal_A.png[55%,55%, align=center]
-
++
+image::Azure_Arc_Portal_A.png[55%,55%, align=center]
++
 * Once you have chosen a specfic VM from the Mahcines list, you can deploy additional extentions sush as Custom Script Extenstion for Linux, assign polices to the VM, or enable Monitor insights which will allow you to view and create reports such as VM performance and workload networkign mapping.
-
-image::../assets/images/Azure_Arc_Portal_B.png[55%,55%, align=center]
++
+image::Azure_Arc_Portal_B.png[55%,55%, align=center]
 
 == Notes from the field:
 
