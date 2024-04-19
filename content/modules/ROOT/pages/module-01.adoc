@@ -245,7 +245,7 @@ Convert2Rhel can fail to complete for a varity of reasons, such as 3rd party pac
 
 In other cases the conversion process will initiate a roll back to the state it was before running the conversion. In these cases, you will need to either remidiate the issue such as removing the package, unloading the module from starting or changing enviromental variables that will skip the process in the conversion process.
 
-The most common enviromental variables:
+The most common enviromental variables (Note not recommended for production systems):
 
 ** Solution 1: `echo "export CONVERT2RHEL_ALLOW_UNAVAILABLE_KMODS=1" >> ~/.bashrc; source ~/.bashrc`
 ** Solution 2: `echo "export CONVERT2RHEL_TAINTED_KERNEL_MODULE_CHECK_SKIP=1" >> ~/.bashrc; source ~/.bashrc`
