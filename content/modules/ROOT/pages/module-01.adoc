@@ -16,20 +16,7 @@ In this lab you will:
 * Validate the Web App still works
 * Discuss security and conversion technical issues
 
-== Lab Access
-
-. Access your *httpd server VM* with the following command.
-+
-[source,bash,subs="attributes",role=execute]
-----
-{web_host_ssh_command}
-----
-+
-.`devops` user password
-[source,bash,subs="attributes",role=execute]
-----
-{web_host_ssh_password}
-----
+== Lab Access MySQL Server
 
 . Access your *database server VM* with the following command.
 +
@@ -44,33 +31,25 @@ In this lab you will:
 {database_host_ssh_password}
 ----
 
-== Verify the Web App is Running
-
-. Browse to {web_app}[Sample Web App^] to verify the web app is running.
-+
-.Sample Output
-+
-image::Northwind_Sample_Data.jpg[align=center]
-
-== Run Azure Arc Commands on Both VMs
+. Connect your VM to Azure Arc
 
 Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Servers and OpenShift deployemnts that are deployed on-premsies or in mulit-cloud enviroments. For this lab we pre-created the installation script using a service principal that will connect the AWS VM to Azure Arc. Once the script is executed, the connected VM will display in the Azure portal.
 
-. Switch to root user.
+.. Switch to root user.
 +
 [source,bash,role=execute]
 ----
 sudo -i
 ----
 
-. Change into the home directory of root
+.. Change into the home directory of root
 +
 [source,bash,role=execute]
 ----
 cd /root
 ----
 
-. Execute the Arc connection sript named deploy_arc.sh
+.. Execute the Arc connection sript named deploy_arc.sh
 +
 [source,bash,role=execute]
 ----
@@ -79,9 +58,59 @@ cd /root
 
 The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024. You can verify the agent and its dependencies are installed in the /opt/azcmagent/bin folder.
 
+== Lab Access Web Server
+
+. Access your *httpd server VM* with the following command.
++
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_command}
+----
++
+.`devops` user password
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_password}
+----
+
+. Connect your VM to Azure Arc
+
+Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Servers and OpenShift deployemnts that are deployed on-premsies or in mulit-cloud enviroments. For this lab we pre-created the installation script using a service principal that will connect the AWS VM to Azure Arc. Once the script is executed, the connected VM will display in the Azure portal.
+
+.. Switch to root user.
++
+[source,bash,role=execute]
+----
+sudo -i
+----
+
+.. Change into the home directory of root
++
+[source,bash,role=execute]
+----
+cd /root
+----
+
+.. Execute the Arc connection sript named deploy_arc.sh
++
+[source,bash,role=execute]
+----
+./deploy_arc.sh
+----
+
+The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024. You can verify the agent and its dependencies are installed in the /opt/azcmagent/bin folder.
+
+=== Verify the Web App is Running
+
+. Browse to {web_app}[Sample Web App^] to verify the web app is running.
++
+.Sample Output
++
+image::Northwind_Sample_Data.jpg[align=center]
+
 == Run the Convert2RHEL Commands on Both VMs
 
-Now we'll actually do the Centos to RHEL conversion.
+Now we'll actually do the Centos to RHEL conversion. Keep in mind using the SSH access steps for each VM in the lab from previous sections 2 and 3 and ensure to run the steps in sections 4 and 5 with the elevated privileges.
 
 === Enabling the Convert2RHEL repository
 
