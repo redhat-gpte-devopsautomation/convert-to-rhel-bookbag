@@ -10,30 +10,44 @@ This lab has two Centos VMs: One Apache and one Mysql.
 
 In this lab you will:
 
-* Install the Azure Arc client on both Centos VMs
-* Convert2Rhel both Centos VMs
-* Reboot VMs
+* Install the Azure Arc client on the Web Server/Bastion Centos VM
+* Convert2Rhel Web Server/Bastion Centos VM
+* Reboot Web Server/Bastion VM
+* Use Ansible to install Azure Arc client on the Mysql Centos VM
+* Use Ansible to Convert2Rhel the CentOS VM
+* Use Ansible to Reboot Mysql VM
+* Use Ansible to Validate Mysql VM is RHEL
 * Validate the Web App still works
 * Discuss security and conversion technical issues
 
-== Lab Access MySQL Server
+== Verify the Web App is Running
 
-. Access your *database server VM* with the following command.
+. Browse to {web_app}[Sample Web App^] to verify the web app is running.
++
+.Sample Output
++
+image::Northwind_Sample_Data.jpg[align=center]
+
+== Lab Access Web Server
+
+. Access your *httpd server VM* with the following command.
 +
 [source,bash,subs="attributes",role=execute]
 ----
-{database_host_ssh_command}
+{web_host_ssh_command}
 ----
 +
 .`devops` user password
 [source,bash,subs="attributes",role=execute]
 ----
-{database_host_ssh_password}
+{web_host_ssh_password}
 ----
 
-. Connect your VM to Azure Arc
+== Run Azure Arc Setup Commands on Web Server/Bastion
 
-Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Servers and OpenShift deployemnts that are deployed on-premsies or in mulit-cloud enviroments. For this lab we pre-created the installation script using a service principal that will connect the AWS VM to Azure Arc. Once the script is executed, the connected VM will display in the Azure portal.
+Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Servers and OpenShift deployemnts that are deployed on-premsies or in mulit-cloud enviroments.
+For this lab we pre-created the installation script using a service principal that will connect the AWS VM to Azure Arc.
+Once the script is executed, the connected VM will display in the Azure portal.
 
 .. Switch to root user.
 +
@@ -57,21 +71,6 @@ cd /root
 ----
 
 The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024. You can verify the agent and its dependencies are installed in the /opt/azcmagent/bin folder.
-
-== Lab Access Web Server
-
-. Access your *httpd server VM* with the following command.
-+
-[source,bash,subs="attributes",role=execute]
-----
-{web_host_ssh_command}
-----
-+
-.`devops` user password
-[source,bash,subs="attributes",role=execute]
-----
-{web_host_ssh_password}
-----
 
 . Connect your VM to Azure Arc
 
@@ -108,11 +107,11 @@ The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource w
 +
 image::Northwind_Sample_Data.jpg[align=center]
 
-== Run the Convert2RHEL Commands on Both VMs
+== Run the Convert2RHEL Commands on Web Server/Bastion
 
 Now we'll actually do the Centos to RHEL conversion. Keep in mind using the SSH access steps for each VM in the lab from previous sections 2 and 3 and ensure to run the steps in sections 4 and 5 with the elevated privileges.
 
-=== Enabling the Convert2RHEL repository
+=== Enabling the Convert2RHEL Repository on The Web Server/Bastion
 
 The Convert2RHEL RPM is an offical Red Hat package.
 Therefore it is readily availble from the Red Hat software repository (CDN).
@@ -139,7 +138,7 @@ curl --create-dirs -o /etc/rhsm/ca/redhat-uep.pem https://ftp.redhat.com/redhat/
 curl -o /etc/yum.repos.d/convert2rhel.repo https://ftp.redhat.com/redhat/convert2rhel/7/convert2rhel.repo
 ----
 
-=== Installing the Convert2RHEL utility
+=== Installing the Convert2RHEL Utility
 
 Now that the requisite repository is enabled on your CentOS Linux system, it is time to install the Convert2RHEL utility and prepare the system for conversion.
 
@@ -211,7 +210,9 @@ source ~/.bashrc
 convert2rhel --org 12451665 --activationkey convert2rhel -y
 ----
 +
-NOTE: This process takes some time! The above process ask to confirm at several steps. Adding a `-y` as an argument will automate the input.
+NOTE: This process takes some time!
+The above process ask to confirm at several steps.
+Adding a `-y` as an argument will automate the input.
 
 . Now that the conversion has been deployed successfully, you will need to reboot the system in order to put the changes into effect.
 +
@@ -227,7 +228,8 @@ reboot
 cat /etc/redhat-release
 ----
 
-. Verify that the necessary Red Hat repositories are enabled. Also, note that none of the old CentOS repos are available.
+. Verify that the necessary Red Hat repositories are enabled.
+Also, note that none of the old CentOS repos are available.
 +
 [source,bash,role=execute]
 ----
@@ -246,6 +248,36 @@ less /var/log/convert2rhel/convert2rhel.log
 .Sample Output
 +
 image::Northwind_Sample_Data.jpg[]
+
+
+== Remote Convert to RHEL: Convert the MySQL Host
+
+. Install EPEL and Ansible on Web Server/Bastion
+
+[source,bash,role=execute]
+----
+yum install -y epel-release
+yum install -y ansible tmux
+----
+
+. Start `tmux` so your session doesn't detach
+
+. Run the playbook to set up Arc on the Mysql host
+
+[source,bash,role=execute]
+----
+ansible-playbook -v deploy_arc.yaml
+----
+
+. Run the playbook to Convert to RHEL the Mysql host
+
+[source,bash,role=execute]
+----
+ansible-playbook -v convert_to_rhel.yaml
+----
+
+NOTE: This takes just over 15 mintues.
+Be aware that the terminal doesn't disconnect.
 
 == Congratulations!
 
