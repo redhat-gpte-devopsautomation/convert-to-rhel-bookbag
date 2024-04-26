@@ -250,7 +250,7 @@ image::Northwind_Sample_Data.jpg[]
 +
 [source,bash,role=execute]
 ----
-yum install -y epel-release
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
 yum install -y ansible tmux
 ----
 
