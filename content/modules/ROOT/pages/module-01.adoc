@@ -49,33 +49,8 @@ Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Se
 For this lab we pre-created the installation script using a service principal that will connect the AWS VM to Azure Arc.
 Once the script is executed, the connected VM will display in the Azure portal.
 
-.. Switch to root user.
-+
-[source,bash,role=execute]
-----
-sudo -i
-----
-
-.. Change into the home directory of root
-+
-[source,bash,role=execute]
-----
-cd /root
-----
-
-.. Execute the Arc connection sript named deploy_arc.sh
-+
-[source,bash,role=execute]
-----
-./deploy_arc.sh
-----
-
-The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024. You can verify the agent and its dependencies are installed in the /opt/azcmagent/bin folder.
-
 . Connect your VM to Azure Arc
-
-Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Servers and OpenShift deployemnts that are deployed on-premsies or in mulit-cloud enviroments. For this lab we pre-created the installation script using a service principal that will connect the AWS VM to Azure Arc. Once the script is executed, the connected VM will display in the Azure portal.
-
++
 .. Switch to root user.
 +
 [source,bash,role=execute]
@@ -97,13 +72,14 @@ cd /root
 ./deploy_arc.sh
 ----
 
-The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024. You can verify the agent and its dependencies are installed in the /opt/azcmagent/bin folder.
+The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024.
+You can verify the agent and its dependencies are installed in the /opt/azcmagent/bin folder.
 
 === Verify the Web App is Running
 
 . Browse to {web_app}[Sample Web App^] to verify the web app is running.
 +
-.Sample Output
+.Web App is Running
 +
 image::Northwind_Sample_Data.jpg[align=center]
 
@@ -215,10 +191,29 @@ The above process ask to confirm at several steps.
 Adding a `-y` as an argument will automate the input.
 
 . Now that the conversion has been deployed successfully, you will need to reboot the system in order to put the changes into effect.
+Reboot is required because the system is now running a Red Hat Enterprise Linux Kernel `kernel-3.10.0-1160.118.1.el7.x86_64`
+
 +
 [source,bash,role=execute]
 ----
 reboot
+----
++
+NOTE: Your connection to the bastion will drop.
+After a few minutes, the VM should be up again.
+Try to connect again.
+
+. Access your *httpd server/bastion VM* with the following command.
++
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_command}
+----
++
+.`devops` user password
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_password}
 ----
 
 . Verify the system is running on Red Hat Enterprise Linux.
@@ -245,15 +240,14 @@ less /var/log/convert2rhel/convert2rhel.log
 
 . Verify the Web Application still functions by browsing to {web_app}[Sample Web App^] to verify the web app is running.
 +
-.Sample Output
+.Sample App still running after convert2rhel
 +
 image::Northwind_Sample_Data.jpg[]
-
 
 == Remote Convert to RHEL: Convert the MySQL Host
 
 . Install EPEL and Ansible on Web Server/Bastion
-
++
 [source,bash,role=execute]
 ----
 yum install -y epel-release
@@ -261,26 +255,26 @@ yum install -y ansible tmux
 ----
 
 . Start `tmux` so your session doesn't detach
-
++
 [source,bash,role=execute]
 ----
 tmux
 ----
 
 . Run the playbook to set up Arc on the Mysql host
-
++
 [source,bash,role=execute]
 ----
 ansible-playbook -v deploy_arc.yaml
 ----
 
 . Run the playbook to Convert to RHEL the Mysql host
-
++
 [source,bash,role=execute]
 ----
 ansible-playbook -v convert_to_rhel.yaml
 ----
-
++
 NOTE: This takes just over 15 mintues.
 Keep aware of the job, and make sure that the terminal doesn't disconnect.
 It shouldn't, but you never know.
