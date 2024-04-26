@@ -262,6 +262,11 @@ yum install -y ansible tmux
 
 . Start `tmux` so your session doesn't detach
 
+[source,bash,role=execute]
+----
+tmux
+----
+
 . Run the playbook to set up Arc on the Mysql host
 
 [source,bash,role=execute]
