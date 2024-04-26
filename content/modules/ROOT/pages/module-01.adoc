@@ -282,7 +282,8 @@ ansible-playbook -v convert_to_rhel.yaml
 ----
 
 NOTE: This takes just over 15 mintues.
-Be aware that the terminal doesn't disconnect.
+Keep aware of the job, and make sure that the terminal doesn't disconnect.
+It shouldn't, but you never know.
 
 == Congratulations!
 
