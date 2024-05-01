@@ -48,7 +48,7 @@ NOTE: Accept the fingerprint when connecting by typing yes and pressing enter. Y
 ----
 +
 
-=== Run Azure Arc Setup Commands on Web Server/Bastion
+== Run Azure Arc Setup Commands on Web Server/Bastion
 
 Azure Arc enables the managment and monitoring of infrastrucutre such as RHEL Servers and OpenShift deployemnts that are deployed on-premsies or in mulit-cloud enviroments.
 For this lab we pre-created the installation script using a service principal that will connect the AWS VM to Azure Arc.
