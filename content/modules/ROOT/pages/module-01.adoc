@@ -236,6 +236,8 @@ yum repolist
 ----
 
 . Now you can review the logs from the conversion itself.
+..
+
 +
 [source,bash,role=execute]
 ----
