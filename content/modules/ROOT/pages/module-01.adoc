@@ -236,7 +236,6 @@ yum repolist
 ----
 
 . Now you can review the logs from the conversion itself.
-..
 
 +
 [source,bash,role=execute]
@@ -246,7 +245,7 @@ less /var/log/convert2rhel/convert2rhel.log
 
 NOTE: Use the down arrow key or page down key to view more of the log. To close the log, simply press the "q" key for quit.
 
-.. Verify the Web Application still functions by browsing to {web_app}[Sample Web App^] to verify the web app is running.
+. Verify the Web Application still functions by browsing to {web_app}[Sample Web App^] to verify the web app is running.
 +
 .Sample App still running after convert2rhel
 +
