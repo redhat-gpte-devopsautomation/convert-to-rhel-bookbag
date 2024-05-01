@@ -75,7 +75,7 @@ cd /root
 The azcmagent-1.39.02628-1431.x86_64 will be installed and the VM Arc resource will be associated with the resource group called RedHatSummmit2024.
 You can verify the agent and its dependencies are installed in the /opt/azcmagent/bin folder.
 
-=== Verify the Web App is Running
+=== Verify the Web App is Running After Arc Installation
 
 . Browse to {web_app}[Sample Web App^] to verify the web app is running.
 +
