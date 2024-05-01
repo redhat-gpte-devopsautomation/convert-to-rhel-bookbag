@@ -40,7 +40,7 @@ image::Northwind_Sample_Data.jpg[align=center]
 
 NOTE: Accept the fingerprint when connecting by typing yes and pressing enter. You may see the message "Failed to add the host to the list of known hosts". This message can be ignored, proceed to enter the password below to connect to the server as the user devops.
 
-..`devops` user password
+  .`devops` user password
 [source,bash,subs="attributes",role=execute]
 ----
 {web_host_ssh_password}
