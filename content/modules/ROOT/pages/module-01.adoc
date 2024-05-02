@@ -371,6 +371,16 @@ NOTE: This takes just over 15 mintues.
 Keep aware of the job, and make sure that the terminal doesn't disconnect.
 It shouldn't, but you never know.
 
+. Now that the conversion has been deployed successfully, you will need to reboot the system in order to put the changes into effect.
+Reboot is required because the system is now running a Red Hat Enterprise Linux Kernel `kernel-3.10.0-1160.118.1.el7.x86_64`
+
++
+[source,bash,role=execute]
+----
+reboot
+----
++
+
 == Congratulations!
 
 You have converted from Centos to RHEL, and it's displayed in Arc on the instructors main screen.
