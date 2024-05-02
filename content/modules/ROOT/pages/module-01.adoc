@@ -386,9 +386,8 @@ reboot
 
 You have converted from Centos to RHEL for both VM's. Following the optional lab below you can gain access to the Azure portal and view and manage the Arc enabled VMs from this lab.
 
-. Optional Lab
-+
-Log into Azure portal.
+. Optional Lab: Log into Azure portal.
+
 +
 NOTE: In order to log into the Azure portal, you will need user credentials which you can obtain from lab instructors. 
 Logging into the Azure portal requires the use of MFA which for this lab requires a mobile device that can receive a SMS message.
