@@ -89,7 +89,9 @@ image::Northwind_Sample_Data.jpg[align=center]
 
 == Run the Convert2RHEL Commands on Web Server/Bastion
 
-Now we'll actually do the Centos to RHEL conversion. Keep in mind you are using elevated privileges.
+Now we'll actually do the Centos to RHEL conversion. Keep in mind to use elevated privileges.
+
+NOTE: Verify that you are still on the bastion server and are the root user. If you are not, use the steps below to ensure you are.
 
 . Access your *httpd server VM* with the following command.
 +
