@@ -395,7 +395,7 @@ Logging into the Azure portal requires the use of MFA which for this lab require
 +
 . Via a web browser navigate to https://portal.azure.com
 .. Login in with the username and password given to you by the lab instructors. The username should be redhatsummitlabXXX@MngEnvMCAP768372.onmicrosoft.com
-.. If you gave your phone number to one of the lab instructors, you will be prompted to use MFA and enter a code that will be sent via SMS.
+.. If you provided your phone number to one of the lab instructors, you will be prompted to use MFA and enter a code that will be sent via SMS.
 
 . Once logged into the Azure portal you can navigate to a few key areas (keep in mind your user has Read only rights)
 +
