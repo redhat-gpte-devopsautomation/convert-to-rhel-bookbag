@@ -226,7 +226,7 @@ Try to connect again.
 ----
 cat /etc/redhat-release
 ----
-
++
 . Verify that the necessary Red Hat repositories are enabled.
 Also, note that none of the old CentOS repos are available.
 +
