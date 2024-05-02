@@ -362,7 +362,7 @@ tmux
 ansible-playbook -v deploy_arc.yaml
 ----
 
-. Run the playbook to Convert to RHEL the Mysql host
+. Run the playbook to convert the Mysql host to RHEL.
 +
 [source,bash,role=execute]
 ----
