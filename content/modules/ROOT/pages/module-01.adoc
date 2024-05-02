@@ -315,6 +315,11 @@ In the previous section of the lab, you excuted the conversion process effectily
 [source,bash,role=execute]
 ----
 yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
+----
+. Install Ansible and TMUX on Web Server/Bastion
++
+[source,bash,role=execute]
+----
 yum install -y ansible tmux
 ----
 
