@@ -174,12 +174,11 @@ NOTE: Verify that you are still on the bastion server as root, you can use the `
 If not use the steps below.
 
 Access your *httpd server VM* with the following command.
-+
+
 [source,bash,subs="attributes",role=execute]
 ----
 {web_host_ssh_command}
 ----
-+
 
 Enter `devops` user password
 
@@ -189,7 +188,7 @@ Enter `devops` user password
 ----
 
 Switch to root user.
-+
+
 [source,bash,role=execute]
 ----
 sudo -i
