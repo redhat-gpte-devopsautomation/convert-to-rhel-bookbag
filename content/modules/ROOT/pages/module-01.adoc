@@ -91,9 +91,8 @@ image::Northwind_Sample_Data.jpg[align=center]
 
 Now we'll actually do the Centos to RHEL conversion. Keep in mind to use elevated privileges.
 
-NOTE: Verify that you are still on the bastion server and are the root user. 
-If you are not, use the steps below to ensure you are. 
-You can use the `whoami` and `hostname` commands to ensure you are on the correct server and user. 
+NOTE: Verify that you are still on the bastion server as root, you can use the `whoami` and `hostname` commands to ensure you are on the correct server and user. 
+If not use the steps below.
 
 . Access your *httpd server VM* with the following command.
 +
