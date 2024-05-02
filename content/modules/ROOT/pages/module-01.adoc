@@ -399,7 +399,7 @@ NOTE: In order to log into the Azure portal, you will need user credentials whic
 +
 image::Azure_Arc_Portal_A.png[align=center]
 +
-* Once you have chosen a specfic VM from the Mahcines list, you can deploy additional extentions sush as Custom Script Extenstion for Linux, assign polices to the VM, or enable Monitor insights which will allow you to view and create reports such as VM performance and workload networkign mapping.
+* Once you have chosen a specfic VM from the Mahcines list, you can deploy additional extentions sush as Custom Script Extenstion for Linux, assign polices to the VM, or enable Monitor insights which will allow you to view and create reports such as VM performance and workload network mapping.
 +
 image::Azure_Arc_Portal_B.png[align=center]
 
