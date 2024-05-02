@@ -194,6 +194,7 @@ If not use the steps below.
 ----
 sudo -i
 ----
++
 
 . Before running the Convert2RHEL utility, you need to tell it to ignore the unknown or incompatible kernel modules.
 The Microsoft kernel modules are not known to the conversion system.
