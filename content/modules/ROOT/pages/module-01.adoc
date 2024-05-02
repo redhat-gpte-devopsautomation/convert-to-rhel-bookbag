@@ -309,6 +309,30 @@ image::Northwind_Sample_Data.jpg[]
 
 In the previous section of the lab, you excuted the conversion process effectily in a manual fashion from the command line. Using an automation tool like Ansible, we can reduce the 20 plus commands down to two commands. To start we need to install Ansible on the Web server so we can target the MySQL server.
 
+NOTE: Verify that you are still on the bastion server as root, you can use the `whoami` and `hostname` commands to ensure you are on the correct server and user. 
+If not use the steps below.
+
+Access your *httpd server VM* with the following command.
+
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_command}
+----
+
+Enter `devops` user password
+
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_password}
+----
+
+Switch to root user.
+
+[source,bash,role=execute]
+----
+sudo -i
+----
+
 . Install EPEL and Ansible on Web Server/Bastion
 +
 [source,bash,role=execute]
