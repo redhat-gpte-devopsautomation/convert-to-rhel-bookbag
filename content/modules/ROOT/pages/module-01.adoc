@@ -390,10 +390,14 @@ You have converted from Centos to RHEL for both VM's. Following the optional lab
 +
 Log into Azure portal.
 +
-NOTE: In order to log into the Azure portal, you will need user credentials which you can obtain from lab instructors.
+NOTE: In order to log into the Azure portal, you will need user credentials which you can obtain from lab instructors. 
+Logging into the Azure portal requires the use of MFA which for this lab requires a mobile device that can receive a SMS message.
 +
-. Logging into the Azure portal requires the use of MFA which for this lab requires a mobile device that can receive a SMS message.
-. Once logged into the Azure portal you can navigate to a few key areas
+. Via a web browser navigate to https://portal.azure.com
+.. Login in with the username and password given to you by the lab instructors. The username should be redhatsummitlabXXX@MngEnvMCAP768372.onmicrosoft.com
+.. If you gave your phone number to one of the lab instructors, you will be prompted to use MFA and enter a code that will be sent via SMS.
+
+. Once logged into the Azure portal you can navigate to a few key areas (keep in mind your user has Read only rights)
 +
 * Arc resource blade and find the Infrastructure section and click on Machines to find your VM's connected via Azure Arc
 +
