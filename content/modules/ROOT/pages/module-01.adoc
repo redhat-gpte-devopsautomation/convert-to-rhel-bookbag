@@ -247,9 +247,11 @@ NOTE: Use the down arrow key or page down key to view more of the log.
 To close the log, simply press the "q" key for quit.
 
 . Verify the Web Application still functions by browsing to {web_app}[Sample Web App^] to verify the web app is running.
+
 +
 .Sample App still running after convert2rhel
 +
+
 image::Northwind_Sample_Data.jpg[]
 
 == Remote Convert to RHEL: Convert the MySQL Host
