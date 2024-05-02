@@ -382,7 +382,7 @@ reboot
 
 == Congratulations!
 
-You have converted from Centos to RHEL, and it's displayed in Arc on the instructors main screen.
+You have converted from Centos to RHEL for both VM's. Following the optional lab below you can gain access to the Azure portal and view and manage the Arc enabled VMs from this lab.
 
 . Optional Lab
 +
