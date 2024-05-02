@@ -379,7 +379,6 @@ Reboot is required because the system is now running a Red Hat Enterprise Linux 
 ----
 reboot
 ----
-+
 
 == Congratulations!
 
