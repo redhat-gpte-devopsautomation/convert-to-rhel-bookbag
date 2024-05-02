@@ -195,10 +195,12 @@ sudo -i
 ----
 
 
-. Before running the Convert2RHEL utility, you need to tell it to ignore the unknown or incompatible kernel modules.
+. Before running the Convert2RHEL utility for this lab, you need to tell it to ignore the unknown or incompatible kernel modules.
 The Microsoft kernel modules are not known to the conversion system.
 Execute the following to put the override flag into your environment permanently.
 Once again ensure you are on the correct server and have elevated privileges.
+
+NOTE: The below varaibles are not recommnded for converting production systems. The recommendation would be to remidiate any issues that you may have with 3rd party software prior to converting the system.
 
 .. Allow unknown Modules varaible
 +
