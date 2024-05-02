@@ -381,7 +381,7 @@ Log into Azure portal.
 +
 NOTE: In order to log into the Azure portal, you will need user credentials which you can obtain from lab instructors.
 +
-. Logging into the Azure portal requires the use of Azure Authenticator which can be installed on your mobile device.
+. Logging into the Azure portal requires the use of MFA which for this lab requires a mobile device that can receive a SMS message.
 . Once logged into the Azure portal you can navigate to a few key areas
 +
 * Arc resource blade and find the Infrastructure section and click on Machines to find your VM's connected via Azure Arc
