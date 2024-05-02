@@ -308,6 +308,8 @@ image::Northwind_Sample_Data.jpg[]
 
 == Remote Convert to RHEL: Convert the MySQL Host
 
+In the previous section of the lab, you excuted the conversion process effectily in a manual fashion from the command line. Using an automation tool like Ansible, we can reduce the 20 plus commands down to two commands. To start we need to install Ansible on the Web server so we can target the MySQL server.
+
 . Install EPEL and Ansible on Web Server/Bastion
 +
 [source,bash,role=execute]
