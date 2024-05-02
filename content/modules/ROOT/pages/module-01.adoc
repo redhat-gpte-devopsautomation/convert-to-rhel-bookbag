@@ -170,6 +170,31 @@ yum install -y convert2rhel
 
 == Run the Convert2RHEL Utility
 
+NOTE: Verify that you are still on the bastion server as root, you can use the `whoami` and `hostname` commands to ensure you are on the correct server and user. 
+If not use the steps below.
+
+. Access your *httpd server VM* with the following command.
++
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_command}
+----
++
+
+. Enter `devops` user password
+
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_password}
+----
+
+.. Switch to root user.
++
+[source,bash,role=execute]
+----
+sudo -i
+----
+
 . Before running the Convert2RHEL utility, you need to tell it to ignore the unknown or incompatible kernel modules.
 The Microsoft kernel modules are not known to the conversion system.
 Execute the following to put the override flag into your environment permanently.
