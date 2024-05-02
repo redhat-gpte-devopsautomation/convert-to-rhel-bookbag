@@ -188,7 +188,7 @@ If not use the steps below.
 {web_host_ssh_password}
 ----
 
-.. Switch to root user.
+. Switch to root user.
 +
 [source,bash,role=execute]
 ----
