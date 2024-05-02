@@ -89,7 +89,29 @@ image::Northwind_Sample_Data.jpg[align=center]
 
 == Run the Convert2RHEL Commands on Web Server/Bastion
 
-Now we'll actually do the Centos to RHEL conversion. Keep in mind using the SSH access steps for each VM in the lab from previous sections 2 and 3 and ensure to run the steps in sections 4 and 5 with the elevated privileges.
+Now we'll actually do the Centos to RHEL conversion. Keep in mind you are using elevated privileges.
+
+. Access your *httpd server VM* with the following command.
++
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_command}
+----
++
+
+. Enter `devops` user password
+
+[source,bash,subs="attributes",role=execute]
+----
+{web_host_ssh_password}
+----
+
+.. Switch to root user.
++
+[source,bash,role=execute]
+----
+sudo -i
+----
 
 === Enabling the Convert2RHEL Repository on The Web Server/Bastion
 
